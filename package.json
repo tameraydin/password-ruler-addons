@@ -1,7 +1,7 @@
 {
   "name": "password-ruler-addons",
   "version": "0.1.0",
-  "description": "A tiny wrapper around common-password-rules for using it within PasswordRuler",
+  "description": "A wrapper around common-password-rules for using it within PasswordRuler",
   "main": "dist/password-ruler-addons.js",
   "scripts": {
     "watch": "onchange 'src/*.js' 'test/*.js' -- npm run validate",
