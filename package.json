@@ -10,7 +10,8 @@
     "coverage": "nyc npm test",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "transpile": "mkdirp 'dist' && browserify --standalone 'password-ruler-addons' src/index.js -o dist/password-ruler-addons.js -t [ babelify --presets [ es2015 ] ]",
-    "header": "header dist/*.js"
+    "uglify": "uglifyjs dist/password-ruler-addons.js --c --m --o dist/password-ruler-addons.min.js",
+    "build": "npm run transpile && npm run uglify && header dist/*.js"
   },
   "repository": {
     "type": "git",
@@ -49,7 +50,8 @@
     "mkdirp": "^0.5.1",
     "module-header": "^0.5.0",
     "nyc": "^5.6.0",
-    "onchange": "^2.0.0"
+    "onchange": "^2.0.0",
+    "uglify-js": "^2.6.2"
   },
   "dependencies": {
     "common-password-rules": "latest"
