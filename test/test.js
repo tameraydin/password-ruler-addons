@@ -1,26 +1,23 @@
 import test from 'ava';
 import commonPasswordRules from 'common-password-rules';
-import passwordRulerAddons from '../src/index';
+import { containsLowerCase, contains } from 'common-password-rules';
+import addons from '../src/index';
 
-test('commonPasswordRules', t => {
-  t.same(Object.keys(commonPasswordRules), Object.keys(passwordRulerAddons));
+test('should duplicate common-password-rules', t => {
+  t.same(Object.keys(commonPasswordRules), Object.keys(addons));
+});
 
-  t.is(passwordRulerAddons.containsLowerCase().weight, 1);
-  t.is(passwordRulerAddons.containsLowerCase(1, 3).weight, 3);
+test('should fetch weight properly', t => {
+  t.is(addons.containsLowerCase().weight, 1);
+  t.is(addons.containsLowerCase(1, 3).weight, 3);
+  t.is(addons.contains('[x]', 1, 2).weight, 2);
+});
 
-  t.is(passwordRulerAddons.containsLowerCase().validate('A'),
-    commonPasswordRules.containsLowerCase('A'));
-
-  t.is(passwordRulerAddons.containsLowerCase(2).validate('aA'),
-    commonPasswordRules.containsLowerCase('aA', 2));
-
-  t.is(passwordRulerAddons.containsLowerCase(2, 3).validate('aA'),
-    commonPasswordRules.containsLowerCase('aA', 2));
-
-  t.is(passwordRulerAddons.contains('[x]').validate('x'),
-    commonPasswordRules.contains('x', '[x]'));
-
-  t.is(passwordRulerAddons.contains('[x]', 1, 2).weight, 2);
-  t.is(passwordRulerAddons.contains('[x]').validate('x'),
-    commonPasswordRules.contains('x', '[x]'));
+test('should validate properly', t => {
+  t.is(addons.containsLowerCase().validate('A'), containsLowerCase('A'));
+  t.is(addons.containsLowerCase(2).validate('aA'), containsLowerCase('aA', 2));
+  t.is(addons.containsLowerCase(2, 3).validate('aA'),
+    containsLowerCase('aA', 2));
+  t.is(addons.contains('[x]').validate('x'), contains('x', '[x]'));
+  t.is(addons.contains('[x]').validate('x'), contains('x', '[x]'));
 });
