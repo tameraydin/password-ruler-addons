@@ -19,7 +19,7 @@ containsLowerCase(); // => { validate: [Function], weight: 1 }
 new PasswordRuler({
   lowerCase: containsLowerCase(2, 3),
   noBirthDate: excludesBirthDate()
-})
+});
 ```
 
 ## API
